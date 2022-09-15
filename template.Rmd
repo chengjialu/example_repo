@@ -1,0 +1,72 @@
+---
+title: "Simple document"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: hide
+    ##overview of the document with folding code blocks
+---
+
+```{r, echo=FALSE, message=FALSE}
+library(tidyverse)
+```
+
+
+I'm an R Markdown document! 
+
+# Section 1
+
+Here's a **code chunk** that samples from 
+a _normal distribution_:
+
+```{r}
+##"opt + command + I" as the key stroke
+samp = rnorm(100)
+length(samp)
+```
+
+# Section 2
+
+I can take the mean of the sample, too!
+The mean is `r round(mean(samp),2)`.
+
+# Section 3
+## plot from last time
+This is going to make a plot! First I generate a dataframe, then use `ggplot` to make a scatterplot and a histogram.
+
+```{r chunk_scatterplot}
+plot_df = 
+  tibble(
+    x = rnorm(n=1000),
+    y = 1 + 2 * x + rnorm(n=1000)
+  )
+
+ggplot(plot_df, aes(x=x, y=y)) + geom_point()
+```
+
+```{r chunk_histogram}
+ggplot(plot_df, aes(x=x)) + geom_histogram()
+```
+
+
+## plot for learning assessment
+This is a quick solution to the Learning Assessment
+
+```{r}
+la_df = 
+  tibble(
+    norm  = rnorm(n=500, mean=1),
+    logical = norm>0,
+    abs_norm = abs(norm)
+  )
+
+ggplot(la_df, aes(x=abs_norm)) + geom_histogram()
+```
+
+* The mean of the sample is `r mean(pull(la_df, norm))`
+* The median of the sample is `r median(pull(la_df, norm))`
+* The median of the sample is `r median(pull(la_df, norm))`
+
+1.  Numbered list item 1
+1.  Number item 2.
